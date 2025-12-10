@@ -1,0 +1,361 @@
+/* IMPORTAÇÃO DA FONTE TECNOLÓGICA */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+/* ======================================================= */
+/* === ESTILOS GERAIS === */
+/* ======================================================= */
+body {
+  font-family: 'Orbitron', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  background-color: #1a1a1a;
+  /* Fundo escuro */
+  color: white;
+  overflow: hidden;
+  /* Evita rolagem indesejada com a animação */
+}
+
+/* Título Neon */
+h1 {
+  color: #61dafb;
+  text-shadow: 0 0 10px rgba(97, 218, 251, 0.7);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* === ÁREA GERAL DO JOGO === */
+.game {
+  position: relative;
+  z-index: 10;
+  margin: 0 auto;
+  text-align: center;
+  padding: 20px;
+}
+
+/* Efeito de Vidro no Container do Tabuleiro */
+.game-board-container {
+  background-color: rgba(68, 68, 68, 0.8);
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.game-board {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* === TELA DE CADASTRO (TRANSPARENTE E SEM CAIXA) === */
+.registration-screen {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  width: 100%;
+  max-width: 500px;
+  background: transparent;
+  box-shadow: none;
+  padding: 20px;
+}
+
+.input-group {
+  margin-bottom: 25px;
+  text-align: left;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #0ff;
+  /* Ciano Neon */
+  text-shadow: 0 0 5px #0ff;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  border: 2px solid #333;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.1em;
+  transition: all 0.3s ease;
+}
+
+.input-group input:focus {
+  outline: none;
+  border-color: #0ff;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+}
+
+.submit-button {
+  background: linear-gradient(45deg, #ff00de, #61dafb);
+  color: white;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 1.2em;
+  font-weight: bold;
+  font-family: 'Orbitron', sans-serif;
+  text-transform: uppercase;
+  width: 100%;
+  margin-top: 10px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.submit-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(255, 0, 222, 0.8);
+}
+
+/* === ANIMAÇÃO DE FUNDO (X e O FLUTUANTES) === */
+.background-animation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.floating-piece {
+  position: absolute;
+  font-size: 4rem;
+  font-weight: bold;
+  opacity: 0;
+  animation: floatAndBlink 4s infinite;
+}
+
+@keyframes floatAndBlink {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.8);
+    text-shadow: 0 0 0 transparent;
+  }
+
+  20% {
+    opacity: 0.8;
+    text-shadow: 0 0 20px currentColor;
+  }
+
+  50% {
+    opacity: 0.4;
+  }
+
+  80% {
+    opacity: 0.9;
+    text-shadow: 0 0 30px currentColor;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-50px) scale(1.2);
+  }
+}
+
+/* === ESTILOS DO TABULEIRO === */
+.square {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  float: left;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 60px;
+  height: 60px;
+  width: 60px;
+  margin-right: -1px;
+  margin-top: -1px;
+  padding: 0;
+  text-align: center;
+  cursor: pointer;
+  color: #fff;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.square:hover {
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 10px #61dafb;
+}
+
+.winning-square {
+  background-color: rgba(97, 218, 251, 0.5) !important;
+  box-shadow: 0 0 15px #61dafb;
+}
+
+.board-wrapper {
+  width: 178px;
+  margin: 0 auto;
+}
+
+.board-row {
+  display: flex;
+  justify-content: center;
+}
+
+/* === SELETOR DE MODO (NOVO) === */
+.mode-selector {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid rgba(97, 218, 251, 0.2);
+  border-radius: 8px;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.mode-button {
+  background-color: #333;
+  color: #61dafb;
+  border: 1px solid #61dafb;
+  padding: 8px 15px;
+  cursor: pointer;
+  font-size: 0.9em;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: all 0.2s;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.mode-button:hover {
+  background-color: #444;
+  box-shadow: 0 0 8px rgba(97, 218, 251, 0.5);
+}
+
+.active-mode {
+  background-color: #61dafb;
+  color: #1a1a1a;
+  box-shadow: 0 0 15px rgba(97, 218, 251, 0.8);
+  transform: scale(1.05);
+}
+
+/* === SELETOR DE DIFICULDADE (NOVO) === */
+.difficulty-selector {
+  margin-top: 20px;
+  padding: 10px 0;
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.difficulty-selector label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 0.9em;
+  color: #ff00de;
+  /* Magenta Neon */
+  text-shadow: 0 0 5px #ff00de;
+}
+
+.difficulty-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.diff-button {
+  background-color: rgba(51, 51, 51, 0.8);
+  color: #fff;
+  border: 1px solid #ff00de;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 0.8em;
+  font-weight: bold;
+  border-radius: 4px;
+  transition: all 0.2s;
+  font-family: 'Orbitron', sans-serif;
+  text-transform: uppercase;
+}
+
+.diff-button:hover {
+  background-color: #444;
+}
+
+.active-diff {
+  background-color: #ff00de;
+  /* Magenta ativa */
+  color: #1a1a1a;
+  box-shadow: 0 0 15px rgba(255, 0, 222, 0.7);
+  transform: scale(1.05);
+}
+
+
+/* === PLACAR E OVERLAY === */
+.placar-container {
+  margin: 20px auto;
+  width: 100%;
+  max-width: 400px;
+  padding: 15px;
+  border: 1px solid #0ff;
+  border-radius: 8px;
+  background-color: rgba(0, 0, 0, 0.8);
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+}
+
+.placar-container h3 {
+  color: #0ff;
+}
+
+.score-table th {
+  border-bottom: 1px solid #0ff;
+  color: #0ff;
+}
+
+.overlay-panel {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(20, 20, 20, 0.95);
+  padding: 30px;
+  border-radius: 15px;
+  z-index: 20;
+  border: 2px solid #ff00de;
+  box-shadow: 0 0 30px rgba(255, 0, 222, 0.4);
+  width: 90vw;
+  max-width: 320px;
+  text-align: center;
+}
+
+.continue-button {
+  background-color: #f7a049;
+  color: #282c34;
+}
+
+.new-players-button {
+  background-color: #3a75a0;
+  color: white;
+}
+
+/* === RESPONSIVIDADE (MOBILE) === */
+@media (max-width: 600px) {
+  .square {
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    font-size: 1.5em;
+  }
+
+  .board-wrapper {
+    width: 148px;
+  }
+
+  .registration-screen {
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 1.5em;
+  }
+}
